@@ -33,8 +33,9 @@ function ScrapeContainer() {
                                         (i < 6) ?
                                             <Col l={4} m={6} s={12}>
                                                 <Card
+                                                    className="cardScrape"
                                                     actions={[
-                                                        <a className="truncate" key={news.title} href={news.link} target="_blank">{news.title}</a>
+                                                        <a className="truncate" key={news.title} href={news.link} target="_blank" rel="noopener noreferrer">{news.title}</a>
                                                     ]}
                                                     closeIcon={<Icon>close</Icon>}
                                                     header={<CardTitle image={news.image}>{news.title}</CardTitle>}

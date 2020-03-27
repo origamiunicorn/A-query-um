@@ -1,35 +1,42 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Button, Icon } from 'react-materialize';
+import { Button, Icon, CardPanel } from 'react-materialize';
 import Input from "./Input";
 import API from "../utils/API";
 
-function SignUpForm() {
-    const { register, handleSubmit, watch, errors } = useForm()
+function SignUpForm(props) {
+    const { register, handleSubmit, errors } = useForm();
+
+    useLayoutEffect(() => {
+        //document.querySelector("#sign-up-frm").reset();
+    })
+
     const onSubmit = data => {
         const { fullname, username, email_address, password } = data;
         API.signup({
             username: username,
-            password: password
-        })
-            .then(response => {
-                console.log(response)
-                if (!response.data.errmsg) {
-                    console.log('successful signup')
-                    window.location.href('/')
-                } else {
-                    console.log('username already taken')
-                }
-            }).catch(error => {
-                console.log('signup error: ')
-                console.log(error)
-
-            })
+            password: password,
+            email: email_address,
+            userpic: "/images/user01.jpg",
+            firstName: fullname
+        }).then(function (data) {
+            if (data.data.error && data.data.error.errmsg) {
+                props.setMessage("Email address already exists");
+            } else {
+                props.updateUser({
+                    loggedIn: true,
+                    username: data.data.firstname
+                })
+            }
+        }).catch(function (err) {
+            //console.log(err);
+            props.setMessage("Sign Up Error");
+        });
     }
 
     return (
         <>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form id="sign-up-frm" onSubmit={handleSubmit(onSubmit)}>
                 <Input label="Name" name="fullname" inputRef={register({
                     required: true
                 })} />
@@ -60,6 +67,14 @@ function SignUpForm() {
                 <Input label="Password" name="password" type="password" inputRef={register({ required: true })} />
                 {errors.password && <span className="error-msg">This field is required</span>}
                 <br />
+                {(props.message) ?
+                    <CardPanel className="teal">
+                        <span className="white-text">
+                            {props.message}
+                        </span>
+                    </CardPanel>
+                    : ""
+                }
                 <Button className="teal" type="submit">
                     Submit
                     <Icon right>

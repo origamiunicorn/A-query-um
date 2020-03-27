@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Modal, Button } from 'react-materialize';
-import SignUpForm from './SignUpForm';
+import { Modal, Button, Icon } from 'react-materialize';
+import LoginForm from './LoginForm';
 
-function SignUp(props) {
+function LoginSideNav(props) {
     const [message, setMessage] = useState();
 
     const handleOpen = () => {
@@ -16,7 +16,7 @@ function SignUp(props) {
             ]}
             bottomSheet={false}
             fixedFooter={false}
-            header="Sign Up"
+            header="Login"
             id="modal-0"
             options={{
                 dismissible: true,
@@ -31,11 +31,16 @@ function SignUp(props) {
                 preventScrolling: true,
                 startingTop: '4%'
             }}
-            trigger={<Button className="teal" node="button">Sign Up</Button>}
+            trigger={<Button flat className="waves-effect waves-teal" style={{ textTransform: "none" }} node="button"><strong>Login</strong>
+                <Icon left>
+                    account_circle
+                    </Icon>
+            </Button>}
         >
-            <SignUpForm updateUser={props.updateUser} message={message} setMessage={setMessage} />
+            <LoginForm updateUser={props.updateUser} message={message} setMessage={setMessage} />
+
         </Modal>
     );
 }
 
-export default SignUp;
+export default LoginSideNav;

@@ -1,14 +1,41 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs');
-mongoose.promise = Promise
 
 // Define userSchema
 const userSchema = new Schema({
+    firstName: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    email: {
+        type: String,
+        trim: true,
+        required: true
+    },
+    password: {
+        type: String,
+        trim: true,
+        required: true
+    },
     username: String,
-    password: String,
-    email: String,
-    firstName: String
+    adminType: {
+        type: Boolean,
+        default: false
+    },
+    userpic: {
+        type: String,
+        default: "/images/user01.jpg"
+    },
+    fishes: [
+        {
+            // Store ObjectIds in the array
+            type: Schema.Types.ObjectId,
+            // The ObjectIds will refer to the ids in the Fish model
+            ref: "Fish"
+        }
+    ]
 })
 // Define schema methods
 userSchema.methods = {
@@ -22,12 +49,12 @@ userSchema.methods = {
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
     if (!this.password) {
-        console.log('models/user.js =======NO PASSWORD PROVIDED=======')
-        next()
+        //console.log('UserSchema js =======NO PASSWORD PROVIDED=======')
+        next();
     } else {
-        console.log('models/user.js hashPassword in pre save');
-        this.password = this.hashPassword(this.password)
-        next()
+        //console.log('UserSchema js ======== hashPassword in pre save');
+        this.password = this.hashPassword(this.password);
+        next();
     }
 })
 const User = mongoose.model('User', userSchema)

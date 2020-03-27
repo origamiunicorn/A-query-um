@@ -2,6 +2,8 @@ import React, { useState, useLayoutEffect } from 'react';
 import { Container, Row, Col } from 'react-materialize';
 import API from "../utils/API";
 import FishDetail from "./FishDetail";
+import Loader from "../components/Loader";
+import ScrollTop from './ScrollTop';
 
 function FishDetailContainer(props) {
     const [results, setResults] = useState();
@@ -24,7 +26,7 @@ function FishDetailContainer(props) {
                 <Col s={12}>
                     {
                         !results ? (
-                            <h1 className="text-center">No Results to Display</h1>
+                            <Loader />
                         ) : (
                                 <FishDetail fish={results} />
                             )
@@ -32,6 +34,7 @@ function FishDetailContainer(props) {
                     }
                 </Col>
             </Row>
+            <ScrollTop />
         </Container>
     );
 }

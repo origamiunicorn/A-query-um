@@ -8,7 +8,7 @@ const express = require('express'),
     //Required for authentication 
     session = require('express-session'),
     MongoStore = require('connect-mongo')(session),
-    passport = require('./passport'),
+    passport = require('./config/passport'),
     mongoose = require('mongoose'),
     keys = require("./keys");
 
@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 // Bodyparsing
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // Serve our static build files
 app.use(express.static(path.join(__dirname, '../client/build')));
@@ -40,6 +40,7 @@ app.use(
         saveUninitialized: false //required
     })
 )
+//app.use(session({ secret: "secret-key", resave: true, saveUninitialized: true }));
 
 //Passport Middleware 
 app.use(passport.initialize()) //Serialize user

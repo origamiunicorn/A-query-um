@@ -1,12 +1,20 @@
 import React from "react";
-import { Footer } from "react-materialize";
+import { Footer, Icon } from "react-materialize";
 
 function PageFooter() {
     return (
         <Footer
             className="grey darken-4"
             copyrights="&copy; 2020 A-Query-Um"
-            links={<ul><li><a className="grey-text text-lighten-3" href="https://github.com/shruti-gaonkar/A-query-um/">GitHub Repo</a></li></ul>}
+            links={
+                <ul className="valign-wrapper">
+                    <li>
+                        <a className="grey-text text-lighten-3" href="https://github.com/shruti-gaonkar/A-query-um/">GitHub Repo</a>
+                        <br />
+                        <br />
+                        <a className="grey-text text-lighten-3" href="#"><Icon tiny>arrow_upward</Icon>&nbsp;Return To Top</a>
+                    </li>
+                </ul>}
         >
             <h5 className="white-text">
                 A-query-um

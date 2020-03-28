@@ -10,7 +10,7 @@ function ProfilePage(props) {
 
     useEffect(() => {
         getUser();
-    })
+    });
 
     const [user, setUser] = useState();
     const [name, setName] = useState();
@@ -26,16 +26,13 @@ function ProfilePage(props) {
         })
     };
 
-
     const onSubmit = (data) => {
         console.log(data);
         console.log(user);
         API.updateUser({
-
             username: data.username
-
         }).then(function (response) {
-            console.log(response);
+            setUser(response.username);
             window.location.reload();
         })
     };
@@ -45,7 +42,6 @@ function ProfilePage(props) {
         API.updatepic({
             userpic: e
         }).then(function (res) {
-
             setUserpic(e);
             window.location.reload();
         })
@@ -58,39 +54,50 @@ function ProfilePage(props) {
 
     const adminPage = (e) => {
         window.location.href = '/fish/create';
-    }
+    };
 
     return (
         <>
             <Container>
                 <Row>
-                    <Col s={12} className="l6 offset-l3">
+                    <Col s={12} className="l10 offset-l1">
                         <Card>
                             <Row className="valign-wrapper">
-                                <Col>
-                                    <img src={userpic} className="circle" alt="A fish." />
+                                <Col s={12} m={6}>
+                                    <p className="center-align">
+                                        <img src={userpic} className="circle" alt="A fish." />
+                                    </p>
                                 </Col>
-                                <Col>
-                                    <h4>
-                                        Welcome,
-                                        <br />
-                                        {user}!
+                                <Col s={12}>
+                                    <h4 className="center-align">
+                                        Welcome, {user}!
                                         </h4>
-                                        
-                                    <Button className="orange" type="submit" onClick={(e) => aquariumPage(e)}>
-                                        Visit Aquarium
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col s={12} m={6} style={{ paddingTop: "10px" }}>
+                                    <p className="center-align">
+                                        <Button className="orange" type="submit" onClick={(e) => aquariumPage(e)}>
+                                            Visit Aquarium
                                     </Button>
-
-                                    {admin ? (<Button className="orange" type="submit" onClick={(e) => adminPage(e)}>
-                                        Add Fish (admin only)
-                                    </Button>) : (<> </>)}
+                                    </p>
+                                </Col>
+                                <Col s={12} m={6} style={{ paddingTop: "10px" }}>
+                                    {admin ? (
+                                        <>
+                                            <p className="center-align">
+                                                <Button className="orange" type="submit" onClick={(e) => adminPage(e)}>
+                                                    Add Fish (admin only)
+                                            </Button>
+                                            </p>
+                                        </>) : (<> </>)}
                                 </Col>
                             </Row>
                         </Card>
                     </Col>
                 </Row>
                 <Row>
-                    <Col s={12} className="l6 offset-l3">
+                    <Col s={12} className="l10 offset-l1">
                         <Card
                             className="blue-grey darken-1"
                             title="Profile Settings"

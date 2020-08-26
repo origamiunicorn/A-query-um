@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 // Provides great rout logging in our console for debugging
 app.use(morgan('dev'));
 
-const MONGODB_URI = process.env.MONGODB_URI || `mongodb://${mlabUser}:${mlabPass}@ds245615.mlab.com:45615/heroku_0mhvm21t` || "mongodb://localhost/aqueryumDB";
+const DB_URI = process.env.DB_URI || `mongodb://${mlabUser}:${mlabPass}@ds245615.mlab.com:45615/heroku_0mhvm21t` || "mongodb://localhost/aqueryumDB";
 const connection = mongoose.connection;
 
 //Passport ----------------------
@@ -50,7 +50,7 @@ app.use(passport.session()) // Deserialize User
 app.use('/', router);
 
 // Connect to the Mongo DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
 if (process.emitWarning.NODE_ENV === "production") {
     app.use(express.static("client/build"))

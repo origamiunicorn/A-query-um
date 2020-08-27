@@ -1,4 +1,4 @@
-exports.mlab = {
-    username: process.env.MLAB_USERNAME,
-    password: process.env.MLAB_PASSWORD
+exports.atlas = {
+    username: process.env.ATLAS_USERNAME,
+    password: process.env.ATLAS_PASSWORD
 }

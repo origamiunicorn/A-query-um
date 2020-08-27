@@ -12,8 +12,8 @@ const express = require('express'),
     mongoose = require('mongoose'),
     keys = require("./keys");
 
-const mlabUser = keys.mlab.username;
-const mlabPass = keys.mlab.password;
+const atlasUser = keys.atlas.username;
+const atlasPass = keys.atlas.password;
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 // Provides great rout logging in our console for debugging
 app.use(morgan('dev'));
 
-const DB_URI = process.env.DB_URI || `mongodb://${mlabUser}:${mlabPass}@ds245615.mlab.com:45615/heroku_0mhvm21t` || "mongodb://localhost/aqueryumDB";
+const DB_URI = process.env.DB_URI || `mongodb+srv://${atlasUser}:${atlasPass}@aqueryum.nlpj7.mongodb.net/heroku_0mhvm21t?retryWrites=true&w=majority` || "mongodb://localhost/aqueryumDB";
 const connection = mongoose.connection;
 
 //Passport ----------------------

@@ -29,6 +29,7 @@ app.use(morgan('dev'));
 
 const DB_URI = process.env.DB_URI || `mongodb+srv://${atlasUser}:${atlasPass}@aqueryum.nlpj7.mongodb.net/heroku_0mhvm21t?retryWrites=true&w=majority` || "mongodb://localhost/aqueryumDB";
 const connection = mongoose.connection;
+console.log("This is the process.env.DB_URI: " + process.env.DB_URI);
 
 //Passport ----------------------
 //Use Session and session storage

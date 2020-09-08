@@ -19,7 +19,7 @@
         "url": "https://github.com/anthonyrivas/CommunicusQuestionLibrary/issues"
     },
     "devDependencies": {
-        "concurrently": "^4.1.2"
+        "concurrently": "^5.3.0"
     },
     "dependencies": {
         "@nzambello/react-scrolltop": "^0.1.2",
